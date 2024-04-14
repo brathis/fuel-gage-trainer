@@ -20,7 +20,7 @@ export class FuelTank {
 
   getQuantity$(): Observable<number> {
     return this._level$.pipe(
-      map((level: number) => Math.round((level / 100) * this.capacity))
+      map((level: number) => Math.round((level / 100) * this.capacity)),
     );
   }
 }

@@ -1,14 +1,13 @@
-:host {
-    display: block;
-    background-image: url('/assets/fuel_gage.svg');
-    background-repeat: no-repeat;
-    background-size:contain;
-    height: 100px;
+.gage {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 100px;
 }
 
 img {
-    position: relative;
-    height: 100%;
-    transform-origin: bottom center;
-    transition: transform 2s ease-in-out;
+  position: relative;
+  height: 100%;
+  transform-origin: bottom center;
+  transition: transform 2s ease-in-out;
 }

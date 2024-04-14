@@ -8,9 +8,8 @@ describe('FuelGageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FuelGageComponent ]
-    })
-    .compileComponents();
+      declarations: [FuelGageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(FuelGageComponent);
     component = fixture.componentInstance;

@@ -26,7 +26,7 @@ export class FuelGagesComponent implements OnInit {
           sum += quantity;
         }
         return sum;
-      })
+      }),
     );
   }
 
@@ -48,7 +48,7 @@ export class FuelGagesComponent implements OnInit {
       tank.setLevel(Math.random() * 100);
     }
     // FIXME: Instead of a timer, can we get an event when the CSS transition has completed?
-    timer(2000).subscribe(_value => {
+    timer(2000).subscribe((_value) => {
       this.fuelGagesState = FuelGagesState.HIDDEN;
     });
   }
