@@ -1,1 +1,26 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+:root {
+    --white: #FEFAF6;
+    --beige: #EADBC8;
+    --beige-dark: #DAC0A3;
+    --navy: #102C57;
+
+    --gray-100: hsl(232, 6%, 25%);
+    --gray-300: hsl(232, 6%, 35%);
+    --gray-800: hsl(232, 6%, 85%);
+}
+
+body {
+  margin: 0;
+  background-color: var(--white);
+  color: var(--navy);
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+h3,
+h5 {
+  margin: 0;
+}
