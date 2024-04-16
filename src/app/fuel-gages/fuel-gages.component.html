@@ -1,10 +1,9 @@
 <div class="panel">
-  <h1 class="header">Robinson R44<br />Fuel Gage Trainer</h1>
   <div class="gages">
-    <app-fuel-gage
-      *ngFor="let tank of tanks"
-      [level]="tank.getLevel$() | async"
-    ></app-fuel-gage>
+    <div class="gage" *ngFor="let tank of tanks">
+      <div class="capacity"> Capacity: {{ tank.getCapacity() }} l </div>
+      <app-fuel-gage [level]="tank.getLevel$() | async"></app-fuel-gage>
+    </div>
   </div>
   <div class="button">
     <button
@@ -15,8 +14,8 @@
         fuelGagesState === "VISIBLE"
           ? "Start over"
           : fuelGagesState === "RESETTING"
-          ? "Resetting..."
-          : "Reveal"
+            ? "Resetting..."
+            : "Reveal"
       }}
     </button>
   </div>
@@ -27,7 +26,7 @@
         visibility: fuelGagesState === 'VISIBLE' ? 'visible' : 'hidden'
       }"
     >
-      {{ totalQuantity$ | async | number : "1.0-0" }} l
+      {{ totalQuantity$ | async | number: "1.0-0" }} l
     </span>
   </div>
 </div>

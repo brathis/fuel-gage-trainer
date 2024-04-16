@@ -5,6 +5,10 @@ export class FuelTank {
 
   constructor(private readonly capacity: number) {}
 
+  getCapacity(): number {
+    return this.capacity;
+  }
+
   setLevel(level: number): void {
     level = Math.max(0, Math.min(100, level));
     this._level$.next(level);

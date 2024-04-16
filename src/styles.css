@@ -11,6 +11,16 @@
   --gray-800: hsl(232, 6%, 85%);
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
   margin: 0;
   background-color: var(--white);
@@ -20,6 +30,7 @@ body {
   font-style: normal;
 }
 
+h1,
 h3,
 h5 {
   margin: 0;
