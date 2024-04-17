@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { FuelGagesComponent } from './fuel-gages/fuel-gages.component';
 import { FuelGageComponent } from './fuel-gages/fuel-gage/fuel-gage.component';
 import { ControlsComponent } from './controls/controls.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { ControlsComponent } from './controls/controls.component';
     FuelGageComponent,
     ControlsComponent,
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

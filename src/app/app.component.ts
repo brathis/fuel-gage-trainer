@@ -1,6 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FuelTank } from './fuel-gages/fuel-tank.model';
-import { Observable, combineLatest, map, timer } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  combineLatest,
+  map,
+  timer,
+} from 'rxjs';
 import { FuelGagesState } from './fuel-gages/fuel-gages.state';
 
 @Component({
@@ -9,10 +16,13 @@ import { FuelGagesState } from './fuel-gages/fuel-gages.state';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'r44-fuel';
   readonly tanks = [new FuelTank(64), new FuelTank(112)];
+  readonly totalCapacity = this.tanks
+    .map((tank) => tank.getCapacity())
+    .reduce((a, b) => a + b, 0);
 
   totalQuantity$: Observable<number>;
+  guess$: Subject<number>;
   fuelGagesState = FuelGagesState.HIDDEN;
 
   constructor() {
@@ -29,17 +39,16 @@ export class AppComponent implements OnInit {
         return sum;
       }),
     );
+    this.guess$ = new BehaviorSubject(0);
   }
 
   ngOnInit(): void {
     this.roll();
   }
 
-  buttonClicked(): void {
+  restartButtonClicked(): void {
     if (this.fuelGagesState === FuelGagesState.VISIBLE) {
       this.roll();
-    } else if (this.fuelGagesState === FuelGagesState.HIDDEN) {
-      this.reveal();
     }
   }
 
@@ -54,7 +63,14 @@ export class AppComponent implements OnInit {
     });
   }
 
-  private reveal(): void {
+  private reveal(guess: number): void {
     this.fuelGagesState = FuelGagesState.VISIBLE;
+    this.guess$.next(guess);
+  }
+
+  guessSubmitted(guess: number): void {
+    if (this.fuelGagesState === FuelGagesState.HIDDEN) {
+      this.reveal(guess);
+    }
   }
 }

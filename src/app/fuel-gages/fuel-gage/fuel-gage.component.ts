@@ -1,9 +1,16 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-fuel-gage',
   templateUrl: './fuel-gage.component.html',
   styleUrls: ['./fuel-gage.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FuelGageComponent implements OnChanges {
   @Input() level: number | null = 0;
