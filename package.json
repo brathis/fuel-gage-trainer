@@ -1,13 +1,15 @@
 {
   "name": "r44-fuel",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "fix": "prettier --write **/*.{js,ts,css,json}"
+    "check": "prettier --check **/*.{js,ts,css,json}",
+    "fix": "prettier --write **/*.{js,ts,css,json}",
+    "postinstall": "npm run check"
   },
   "private": true,
   "dependencies": {
