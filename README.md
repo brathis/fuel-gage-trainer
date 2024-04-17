@@ -8,6 +8,6 @@ The tool is hosted on Github Pages: https://brathis.github.io/fuel-gage-trainer
     ng build --base-href=/fuel-gage-trainer/ && git commit -am "🛠️ build" && git push
 
 ## Feature Ideas
-  * Toggle hints, which display the quantity at each of the lines.
-  * Allow user to submit a guess. Track accuracy and speed of guesses over time.
+  * Toggle hints, which display the quantity at each of the gage markings.
+  * Track accuracy and speed of guesses over time.
   * Support for other Robinson models.
