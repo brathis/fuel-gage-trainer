@@ -1,0 +1,26 @@
+<div class="controls">
+  <div class="button">
+    <button
+      (click)="buttonClicked()"
+      [disabled]="state === 'RESETTING'"
+    >
+      {{
+        state === "VISIBLE"
+          ? "Start over"
+          : state === "RESETTING"
+            ? "Resetting..."
+            : "Reveal"
+      }}
+    </button>
+  </div>
+  <div class="total">
+    <span class="label">Total</span>
+    <span
+      [style]="{
+        visibility: state === 'VISIBLE' ? 'visible' : 'hidden'
+      }"
+    >
+      {{ totalQuantity$ | async | number: "1.0-0" }} l
+    </span>
+  </div>
+</div>

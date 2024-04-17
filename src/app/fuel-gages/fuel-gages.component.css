@@ -1,11 +1,3 @@
-.panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-}
-
 .gages {
   display: flex;
   flex-direction: column;
@@ -16,52 +8,4 @@
 .gages > .gage > .capacity {
   text-align: center;
   margin-bottom: 4px;
-}
-
-.button {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.button > button {
-  font-family: "Roboto", sans-serif;
-  font-size: 20px;
-  font-weight: 500;
-  padding: 8px;
-  background-color: var(--beige-dark);
-  color: var(--white);
-  border: 0;
-  border-radius: 5px;
-  width: 160px;
-}
-
-.button > button:enabled {
-  cursor: pointer;
-}
-
-.button > button:disabled {
-  cursor: progress;
-  color: var(--beige);
-}
-
-.total {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  font-size: 24px;
-  font-weight: 600;
-  background-color: var(--beige);
-  border-radius: 5px;
-  padding: 8px;
-  width: 160px;
-}
-
-.total > .label {
-  font-size: 16px;
-  text-transform: uppercase;
-  color: var(--beige-dark);
 }

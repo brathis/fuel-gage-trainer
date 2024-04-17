@@ -1,32 +1,6 @@
-<div class="panel">
-  <div class="gages">
-    <div class="gage" *ngFor="let tank of tanks">
-      <div class="capacity"> Capacity: {{ tank.getCapacity() }} l </div>
-      <app-fuel-gage [level]="tank.getLevel$() | async"></app-fuel-gage>
-    </div>
-  </div>
-  <div class="button">
-    <button
-      (click)="buttonClicked()"
-      [disabled]="fuelGagesState === 'RESETTING'"
-    >
-      {{
-        fuelGagesState === "VISIBLE"
-          ? "Start over"
-          : fuelGagesState === "RESETTING"
-            ? "Resetting..."
-            : "Reveal"
-      }}
-    </button>
-  </div>
-  <div class="total">
-    <span class="label">Total</span>
-    <span
-      [style]="{
-        visibility: fuelGagesState === 'VISIBLE' ? 'visible' : 'hidden'
-      }"
-    >
-      {{ totalQuantity$ | async | number: "1.0-0" }} l
-    </span>
+<div class="gages">
+  <div class="gage" *ngFor="let tank of tanks">
+    <div class="capacity">Capacity: {{ tank.getCapacity() }} l</div>
+    <app-fuel-gage [level]="tank.getLevel$() | async"></app-fuel-gage>
   </div>
 </div>
