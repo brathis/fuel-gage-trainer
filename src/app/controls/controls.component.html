@@ -1,16 +1,12 @@
 <div class="controls">
   <div class="result" *ngIf="state === 'VISIBLE'">
-    <div class="total">
+    <div class="result-total">
       <span class="label">Total</span>
-      <span>
-        {{ totalQuantity$ | async | number: "1.0-0" }} l
-      </span>
+      <span> {{ totalQuantity$ | async | number: "1.0-0" }} l </span>
     </div>
-    <div class="guess">
+    <div class="result-guess">
       <span class="label">Your Guess</span>
-      <span>
-        {{ guess$ | async | number: "1.0-0" }} l
-      </span>
+      <span> {{ guess$ | async | number: "1.0-0" }} l </span>
     </div>
   </div>
   <div class="button">
@@ -20,9 +16,19 @@
   </div>
   <div class="guess" *ngIf="state === 'RESETTING' || state === 'HIDDEN'">
     <div class="label">
-      {{ state === 'RESETTING' ? 'Resetting...' : 'Enter your guess:' }}
+      {{ state === "RESETTING" ? "Resetting..." : "Enter your guess:" }}
     </div>
-    <input type="number" (keydown.enter)="guessSubmitted()" [(ngModel)]="guess" [disabled]="state === 'RESETTING'" #guessInput/>
-    <button (click)="guessSubmitted()" [disabled]="state === 'RESETTING'">✅</button>
+    <div class="inputs">
+      <input
+        type="number"
+        (keydown.enter)="guessSubmitted()"
+        [(ngModel)]="guess"
+        [disabled]="state === 'RESETTING'"
+        #guessInput
+      />
+      <button (click)="guessSubmitted()" [disabled]="state === 'RESETTING'">
+        ✔️
+      </button>
+    </div>
   </div>
 </div>
