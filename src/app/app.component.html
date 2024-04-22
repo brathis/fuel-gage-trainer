@@ -2,8 +2,9 @@
   <div class="header">
     <h1>Fuel Gage Trainer</h1>
     <h3>for Robinson R44</h3>
-    <p>Practice makes perfect! If you are like me and reading the fuel gages on the R44
-      takes a lot longer than it should, this tool is for you.
+    <p>
+      Practice makes perfect! If you are like me and reading the fuel gages on
+      the R44 takes a lot longer than it should, this tool is for you.
     </p>
     <p>The gages assume R44s with bladder tanks.</p>
   </div>
@@ -12,8 +13,9 @@
     class="controls"
     [totalCapacity]="totalCapacity"
     [state]="fuelGagesState"
-    [totalQuantity$]="totalQuantity$"
-    [guess$]="guess$"
+    [totalQuantity]="totalQuantity"
+    [guess]="guess"
+    [time]="time"
     (restartButtonClicked$)="restartButtonClicked()"
     (guessSubmitted$)="guessSubmitted($event)"
   ></app-controls>

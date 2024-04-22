@@ -37,6 +37,11 @@
   color: var(--beige-dark);
 }
 
+.result-guess .value,
+.result-total .value {
+  font-weight: 400;
+}
+
 .button {
   display: flex;
   flex-direction: row;
@@ -64,7 +69,10 @@
   color: var(--beige);
 }
 
-.guess {
+.timer {
+  color: var(--beige-dark);
+  font-weight: 600;
+  font-size: 24px;
 }
 
 .guess > .inputs {

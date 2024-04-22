@@ -1,13 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FuelTank } from './fuel-gages/fuel-tank.model';
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  combineLatest,
-  map,
-  timer,
-} from 'rxjs';
+import { Subscription, combineLatest, interval, timer } from 'rxjs';
 import { FuelGagesState } from './fuel-gages/fuel-gages.state';
 
 @Component({
@@ -21,25 +14,24 @@ export class AppComponent implements OnInit {
     .map((tank) => tank.getCapacity())
     .reduce((a, b) => a + b, 0);
 
-  totalQuantity$: Observable<number>;
-  guess$: Subject<number>;
+  totalQuantity: number = 0;
+  guess: number = 0;
   fuelGagesState = FuelGagesState.HIDDEN;
+  time = 0;
+  timeSubscription: Subscription | null = null;
 
   constructor() {
     const quantityObservables = [];
     for (const tank of this.tanks) {
       quantityObservables.push(tank.getQuantity$());
     }
-    this.totalQuantity$ = combineLatest(quantityObservables).pipe(
-      map((quantities) => {
-        let sum = 0;
-        for (let quantity of quantities) {
-          sum += quantity;
-        }
-        return sum;
-      }),
-    );
-    this.guess$ = new BehaviorSubject(0);
+    combineLatest(quantityObservables).subscribe((quantities) => {
+      let sum = 0;
+      for (let quantity of quantities) {
+        sum += quantity;
+      }
+      this.totalQuantity = sum;
+    });
   }
 
   ngOnInit(): void {
@@ -60,12 +52,17 @@ export class AppComponent implements OnInit {
     // FIXME: Instead of a timer, can we get an event when the CSS transition has completed?
     timer(2000).subscribe((_value) => {
       this.fuelGagesState = FuelGagesState.HIDDEN;
+      this.time = 0;
+      this.timeSubscription = interval(1000).subscribe((_value) => {
+        ++this.time;
+      });
     });
   }
 
   private reveal(guess: number): void {
+    this.timeSubscription?.unsubscribe();
     this.fuelGagesState = FuelGagesState.VISIBLE;
-    this.guess$.next(guess);
+    this.guess = guess;
   }
 
   guessSubmitted(guess: number): void {
