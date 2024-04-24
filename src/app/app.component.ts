@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FuelTank } from './fuel-gages/fuel-tank.model';
 import { Subscription, combineLatest, interval, timer } from 'rxjs';
 import { FuelGagesState } from './fuel-gages/fuel-gages.state';
+import { Result } from './result.model';
+import { RESULTS_SERVICE, ResultsService } from './results.service';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +17,14 @@ export class AppComponent implements OnInit {
     .reduce((a, b) => a + b, 0);
 
   totalQuantity: number = 0;
-  guess: number = 0;
   fuelGagesState = FuelGagesState.HIDDEN;
   time = 0;
   timeSubscription: Subscription | null = null;
+  result: Result | null = null;
 
-  constructor() {
+  constructor(
+    @Inject(RESULTS_SERVICE) private readonly resultsService: ResultsService,
+  ) {
     const quantityObservables = [];
     for (const tank of this.tanks) {
       quantityObservables.push(tank.getQuantity$());
@@ -62,7 +66,8 @@ export class AppComponent implements OnInit {
   private reveal(guess: number): void {
     this.timeSubscription?.unsubscribe();
     this.fuelGagesState = FuelGagesState.VISIBLE;
-    this.guess = guess;
+    this.result = new Result(new Date(), guess, this.totalQuantity, this.time);
+    this.resultsService.add(this.result);
   }
 
   guessSubmitted(guess: number): void {

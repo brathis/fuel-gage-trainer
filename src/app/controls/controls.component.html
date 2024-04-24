@@ -1,20 +1,20 @@
 <div class="controls">
-  <div class="result" *ngIf="state === 'VISIBLE'">
+  <div class="result" *ngIf="state === 'VISIBLE' && result">
     <div class="result-guess">
       <span class="label">Your Guess</span>
-      <span class="value">{{ guess | number: "1.0-0" }} l</span>
+      <span class="value">{{ result.getGuess() | number: "1.0-0" }} l</span>
     </div>
     <div class="result-total">
       <span class="label">Total</span>
-      <span class="value">{{ totalQuantity | number: "1.0-0" }} l</span>
+      <span class="value">{{ result.getActual() | number: "1.0-0" }} l</span>
     </div>
     <div class="result-error">
       <span class="label">Error</span>
-      <span class="value">{{ error | number: "1.0-0" }} l</span>
+      <span class="value">{{ result.getError() | number: "1.0-0" }} l</span>
     </div>
     <div class="result-time">
       <span class="label">Time Taken</span>
-      <span class="value">{{ time }} s</span>
+      <span class="value">{{ result.getTime() }} s</span>
     </div>
   </div>
   <div class="button">
@@ -31,7 +31,7 @@
       <input
         type="number"
         (keydown.enter)="guessSubmitted()"
-        [(ngModel)]="guessModel"
+        [(ngModel)]="guess"
         [disabled]="state === 'RESETTING'"
         #guessInput
       />

@@ -6,6 +6,8 @@ import { FuelGagesComponent } from './fuel-gages/fuel-gages.component';
 import { FuelGageComponent } from './fuel-gages/fuel-gage/fuel-gage.component';
 import { ControlsComponent } from './controls/controls.component';
 import { FormsModule } from '@angular/forms';
+import { LocalStorageResultsService } from './local-storage-results.service';
+import { RESULTS_SERVICE } from './results.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { FormsModule } from '@angular/forms';
     ControlsComponent,
   ],
   imports: [BrowserModule, FormsModule],
-  providers: [],
+  providers: [
+    { provide: RESULTS_SERVICE, useClass: LocalStorageResultsService },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
