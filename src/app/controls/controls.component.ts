@@ -25,15 +25,21 @@ export class ControlsComponent implements OnChanges {
   @Input() result: Result | null = null;
   @Output() restartButtonClicked$: EventEmitter<void> = new EventEmitter();
   @Output() guessSubmitted$: EventEmitter<number> = new EventEmitter();
+  @Output() overlayToggled$: EventEmitter<boolean> = new EventEmitter();
   @ViewChild('guessInput') guessInput: ElementRef<HTMLInputElement> =
     {} as ElementRef;
   guess = '';
+  showOverlayState = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['state']) {
       switch (changes['state'].currentValue) {
         case FuelGagesState.RESETTING:
           this.guess = '';
+          if (this.showOverlayState) {
+            this.showOverlayState = false;
+            this.overlayToggled$.emit(false);
+          }
           break;
         case FuelGagesState.HIDDEN:
           // TODO: what is the correct lifecycle method to use to avoid setTimeout?
@@ -52,5 +58,15 @@ export class ControlsComponent implements OnChanges {
     if (!Number.isNaN(guess) && 0 <= guess && guess <= this.totalCapacity) {
       this.guessSubmitted$.emit(guess);
     }
+  }
+
+  showOverlay(): void {
+    this.showOverlayState = true;
+    this.overlayToggled$.emit(this.showOverlayState);
+  }
+
+  hideOverlay(): void {
+    this.showOverlayState = false;
+    this.overlayToggled$.emit(this.showOverlayState);
   }
 }

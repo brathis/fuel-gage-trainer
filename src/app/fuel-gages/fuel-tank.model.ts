@@ -27,4 +27,15 @@ export class FuelTank {
       map((level: number) => Math.round((level / 100) * this.capacity)),
     );
   }
+
+  getOverlayLevels(): { level: number; label: string }[] {
+    const quantities = [];
+    for (const level of [0, 25, 50, 75, 100]) {
+      quantities.push({
+        level: level,
+        label: `${Math.round((level / 100) * this.capacity)}`,
+      });
+    }
+    return quantities;
+  }
 }

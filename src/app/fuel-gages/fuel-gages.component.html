@@ -1,6 +1,10 @@
 <div class="gages">
   <div class="gage" *ngFor="let tank of tanks">
     <div class="capacity">Capacity: {{ tank.getCapacity() }} l</div>
-    <app-fuel-gage [level]="tank.getLevel$() | async"></app-fuel-gage>
+    <app-fuel-gage
+      [level]="tank.getLevel$() | async"
+      [overlayLevels]="tank.getOverlayLevels()"
+      [showOverlay]="showOverlay"
+    ></app-fuel-gage>
   </div>
 </div>

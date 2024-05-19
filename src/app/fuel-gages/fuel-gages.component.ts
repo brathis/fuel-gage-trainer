@@ -9,4 +9,5 @@ import { FuelTank } from './fuel-tank.model';
 })
 export class FuelGagesComponent {
   @Input() tanks: FuelTank[] = [];
+  @Input() showOverlay: boolean = false;
 }

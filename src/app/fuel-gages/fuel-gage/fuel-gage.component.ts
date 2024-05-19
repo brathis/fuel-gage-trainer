@@ -14,6 +14,8 @@ import {
 })
 export class FuelGageComponent implements OnChanges {
   @Input() level: number | null = 0;
+  @Input() overlayLevels: { level: number; label: string }[] = [];
+  @Input() showOverlay: boolean = false;
 
   private static readonly a0 = 5.5;
   private static readonly a1 = 0.445;

@@ -8,7 +8,11 @@
     </p>
     <p>The gages assume R44s with bladder tanks.</p>
   </div>
-  <app-fuel-gages class="gages" [tanks]="tanks"></app-fuel-gages>
+  <app-fuel-gages
+    class="gages"
+    [tanks]="tanks"
+    [showOverlay]="showOverlay"
+  ></app-fuel-gages>
   <app-controls
     class="controls"
     [totalCapacity]="totalCapacity"
@@ -17,5 +21,6 @@
     [result]="result"
     (restartButtonClicked$)="restartButtonClicked()"
     (guessSubmitted$)="guessSubmitted($event)"
+    (overlayToggled$)="overlayToggled($event)"
   ></app-controls>
 </div>

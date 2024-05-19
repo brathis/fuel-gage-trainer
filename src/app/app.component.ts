@@ -16,11 +16,14 @@ export class AppComponent implements OnInit {
     .map((tank) => tank.getCapacity())
     .reduce((a, b) => a + b, 0);
 
+  private static readonly MAX_DURATION = 30;
+
   totalQuantity: number = 0;
   fuelGagesState = FuelGagesState.HIDDEN;
   time = 0;
   timeSubscription: Subscription | null = null;
   result: Result | null = null;
+  showOverlay: boolean = false;
 
   constructor(
     @Inject(RESULTS_SERVICE) private readonly resultsService: ResultsService,
@@ -59,6 +62,9 @@ export class AppComponent implements OnInit {
       this.time = 0;
       this.timeSubscription = interval(1000).subscribe((_value) => {
         ++this.time;
+        if (this.time === AppComponent.MAX_DURATION) {
+          this.timeSubscription?.unsubscribe();
+        }
       });
     });
   }
@@ -74,5 +80,9 @@ export class AppComponent implements OnInit {
     if (this.fuelGagesState === FuelGagesState.HIDDEN) {
       this.reveal(guess);
     }
+  }
+
+  overlayToggled(visible: boolean): void {
+    this.showOverlay = visible;
   }
 }
