@@ -53,10 +53,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "r44-fuel:build:production"
+              "buildTarget": "r44-fuel:build:production"
             },
             "development": {
-              "browserTarget": "r44-fuel:build:development"
+              "buildTarget": "r44-fuel:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -64,7 +64,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "r44-fuel:build"
+            "buildTarget": "r44-fuel:build"
           }
         },
         "test": {
