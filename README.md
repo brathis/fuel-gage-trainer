@@ -8,3 +8,4 @@ The tool is hosted on Github Pages: https://brathis.github.io/fuel-gage-trainer
 
 - Track accuracy and speed of guesses over time.
 - Support for other Robinson models.
+- Update Angular
