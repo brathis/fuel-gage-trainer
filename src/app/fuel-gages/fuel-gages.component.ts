@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { FuelTank } from './fuel-tank.model';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { FuelTank } from '../fuel-tank.model';
 
 @Component({
   selector: 'app-fuel-gages',
@@ -8,6 +8,6 @@ import { FuelTank } from './fuel-tank.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FuelGagesComponent {
-  @Input() tanks: FuelTank[] = [];
-  @Input() showOverlay: boolean = false;
+  tanks = input.required<FuelTank[]>();
+  showOverlay = input.required<boolean>();
 }

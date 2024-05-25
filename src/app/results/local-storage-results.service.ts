@@ -15,7 +15,10 @@ export class LocalStorageResultsService implements ResultsService, OnInit {
     this.load();
   }
 
-  public add(result: Result): void {
+  public add(result: Result | null): void {
+    if (!result) {
+      return;
+    }
     this.results.push(result);
     this.persist();
   }

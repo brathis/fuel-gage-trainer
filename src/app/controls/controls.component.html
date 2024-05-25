@@ -1,41 +1,44 @@
 <div class="controls">
-  <div class="result" *ngIf="state === 'VISIBLE' && result">
+  <div class="result" *ngIf="state() === 'VISIBLE' && result">
     <div class="result-guess">
       <span class="label">Your Guess</span>
-      <span class="value">{{ result.getGuess() | number: "1.0-0" }} l</span>
+      <span class="value">{{ result()?.getGuess() | number: "1.0-0" }} l</span>
     </div>
     <div class="result-total">
       <span class="label">Total</span>
-      <span class="value">{{ result.getActual() | number: "1.0-0" }} l</span>
+      <span class="value">{{ result()?.getActual() | number: "1.0-0" }} l</span>
     </div>
     <div class="result-error">
       <span class="label">Error</span>
-      <span class="value">{{ result.getError() | number: "1.0-0" }} l</span>
+      <span class="value">{{ result()?.getError() | number: "1.0-0" }} l</span>
     </div>
     <div class="result-time">
       <span class="label">Time Taken</span>
-      <span class="value">{{ result.getTime() }} s</span>
+      <span class="value">{{ result()?.getTime() }} s</span>
     </div>
   </div>
   <div class="button">
-    <button *ngIf="state === 'VISIBLE'" (click)="restartButtonClicked()">
+    <button *ngIf="state() === 'VISIBLE'" (click)="restartButtonClicked.emit()">
       Start over
     </button>
   </div>
-  <div class="timer" *ngIf="state === 'HIDDEN'">{{ time }} s</div>
-  <div class="guess" *ngIf="state === 'RESETTING' || state === 'HIDDEN'">
+  <div class="timer" *ngIf="state() === 'HIDDEN'">{{ time() }} s</div>
+  <div class="guess" *ngIf="state() === 'RESETTING' || state() === 'HIDDEN'">
     <div class="label">
-      {{ state === "RESETTING" ? "Resetting..." : "Enter your guess:" }}
+      {{ state() === "RESETTING" ? "Resetting..." : "Enter your guess:" }}
     </div>
     <div class="inputs">
       <input
         type="number"
-        (keydown.enter)="guessSubmitted()"
+        (keydown.enter)="emitGuessSubmitted()"
         [(ngModel)]="guess"
-        [disabled]="state === 'RESETTING'"
+        [disabled]="state() === 'RESETTING'"
         #guessInput
       />
-      <button (click)="guessSubmitted()" [disabled]="state === 'RESETTING'">
+      <button
+        (click)="emitGuessSubmitted()"
+        [disabled]="state() === 'RESETTING'"
+      >
         ✔️
       </button>
     </div>

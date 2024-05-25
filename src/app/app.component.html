@@ -11,16 +11,16 @@
   <app-fuel-gages
     class="gages"
     [tanks]="tanks"
-    [showOverlay]="showOverlay"
+    [showOverlay]="showOverlay()"
   ></app-fuel-gages>
   <app-controls
     class="controls"
     [totalCapacity]="totalCapacity"
-    [state]="fuelGagesState"
-    [time]="time"
-    [result]="result"
-    (restartButtonClicked$)="restartButtonClicked()"
-    (guessSubmitted$)="guessSubmitted($event)"
-    (overlayToggled$)="overlayToggled($event)"
+    [state]="fuelGagesState()"
+    [time]="time()"
+    [result]="result()"
+    (restartButtonClicked)="restartButtonClicked()"
+    (guessSubmitted)="guessSubmitted($event)"
+    (overlayToggled)="overlayToggled($event)"
   ></app-controls>
 </div>

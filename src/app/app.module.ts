@@ -6,8 +6,8 @@ import { FuelGagesComponent } from './fuel-gages/fuel-gages.component';
 import { FuelGageComponent } from './fuel-gages/fuel-gage/fuel-gage.component';
 import { ControlsComponent } from './controls/controls.component';
 import { FormsModule } from '@angular/forms';
-import { LocalStorageResultsService } from './local-storage-results.service';
-import { RESULTS_SERVICE } from './results.service';
+import { LocalStorageResultsService } from './results/local-storage-results.service';
+import { RESULTS_SERVICE } from './results/results.service';
 import { OverlayComponent } from './fuel-gages/fuel-gage/overlay/overlay.component';
 
 @NgModule({

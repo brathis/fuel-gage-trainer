@@ -1,7 +1,7 @@
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Signal, computed, signal } from '@angular/core';
 
 export class FuelTank {
-  private _level$ = new BehaviorSubject(0);
+  private _level$ = signal(0);
 
   constructor(private readonly capacity: number) {}
 
@@ -11,21 +11,21 @@ export class FuelTank {
 
   setLevel(level: number): void {
     level = Math.max(0, Math.min(100, level));
-    this._level$.next(level);
+    this._level$.set(level);
   }
 
   getLevel(): number {
-    return this._level$.value;
+    return this._level$();
   }
 
-  getLevel$(): Observable<number> {
-    return this._level$.asObservable();
+  getLevel$(): Signal<number> {
+    return this._level$;
   }
 
-  getQuantity$(): Observable<number> {
-    return this._level$.pipe(
-      map((level: number) => Math.round((level / 100) * this.capacity)),
-    );
+  getQuantity$(): Signal<number> {
+    return computed(() => {
+      return Math.round((this._level$() / 100) * this.capacity);
+    });
   }
 
   getOverlayLevels(): { level: number; label: string }[] {

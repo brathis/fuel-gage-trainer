@@ -6,6 +6,6 @@ export const RESULTS_SERVICE = new InjectionToken<ResultsService>(
 );
 
 export interface ResultsService {
-  add(result: Result): void;
+  add(result: Result | null): void;
   get(): Result[];
 }

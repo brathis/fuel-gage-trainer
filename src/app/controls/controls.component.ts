@@ -2,15 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ViewChild,
+  effect,
+  input,
+  output,
+  viewChild,
 } from '@angular/core';
 import { FuelGagesState } from '../fuel-gages/fuel-gages.state';
-import { Result } from '../result.model';
+import { Result } from '../results/result.model';
 
 @Component({
   selector: 'app-controls',
@@ -18,55 +16,44 @@ import { Result } from '../result.model';
   styleUrls: ['./controls.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ControlsComponent implements OnChanges {
-  @Input() totalCapacity: number = 0;
-  @Input() state: FuelGagesState = FuelGagesState.RESETTING;
-  @Input() time: number = 0;
-  @Input() result: Result | null = null;
-  @Output() restartButtonClicked$: EventEmitter<void> = new EventEmitter();
-  @Output() guessSubmitted$: EventEmitter<number> = new EventEmitter();
-  @Output() overlayToggled$: EventEmitter<boolean> = new EventEmitter();
-  @ViewChild('guessInput') guessInput: ElementRef<HTMLInputElement> =
-    {} as ElementRef;
+export class ControlsComponent {
+  totalCapacity = input.required<number>();
+  state = input.required<FuelGagesState>();
+  time = input.required<number>();
+  result = input.required<Result | null>();
+  overlayToggled = output<boolean>();
+  restartButtonClicked = output<void>();
+  guessSubmitted = output<number>();
+  guessInput = viewChild('guessInput', { read: ElementRef<HTMLInputElement> });
   guess = '';
-  showOverlayState = false;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['state']) {
-      switch (changes['state'].currentValue) {
+  constructor() {
+    effect(() => {
+      switch (this.state()) {
         case FuelGagesState.RESETTING:
           this.guess = '';
-          if (this.showOverlayState) {
-            this.showOverlayState = false;
-            this.overlayToggled$.emit(false);
-          }
+          this.overlayToggled.emit(false);
           break;
         case FuelGagesState.HIDDEN:
-          // TODO: what is the correct lifecycle method to use to avoid setTimeout?
-          setTimeout(() => this.guessInput.nativeElement.focus(), 0);
+          // TODO: what is the correct way to use to avoid setTimeout?
+          setTimeout(() => this.guessInput()?.nativeElement.focus(), 0);
           break;
       }
-    }
+    });
   }
 
-  restartButtonClicked(): void {
-    this.restartButtonClicked$.emit();
-  }
-
-  guessSubmitted(): void {
+  emitGuessSubmitted(): void {
     const guess = Number.parseInt(this.guess);
-    if (!Number.isNaN(guess) && 0 <= guess && guess <= this.totalCapacity) {
-      this.guessSubmitted$.emit(guess);
+    if (!Number.isNaN(guess) && 0 <= guess && guess <= this.totalCapacity()) {
+      this.guessSubmitted.emit(guess);
     }
   }
 
   showOverlay(): void {
-    this.showOverlayState = true;
-    this.overlayToggled$.emit(this.showOverlayState);
+    this.overlayToggled.emit(true);
   }
 
   hideOverlay(): void {
-    this.showOverlayState = false;
-    this.overlayToggled$.emit(this.showOverlayState);
+    this.overlayToggled.emit(false);
   }
 }

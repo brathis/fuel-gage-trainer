@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
+  computed,
+  input,
 } from '@angular/core';
 
 @Component({
@@ -12,25 +11,20 @@ import {
   styleUrls: ['./fuel-gage.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FuelGageComponent implements OnChanges {
-  @Input() level: number | null = 0;
-  @Input() overlayLevels: { level: number; label: string }[] = [];
-  @Input() showOverlay: boolean = false;
+export class FuelGageComponent {
+  level = input.required<number | null>();
+  overlayLevels = input.required<{ level: number; label: string }[]>();
+  showOverlay = input.required<boolean>();
+
+  handRotationDeg = computed(() => {
+    return `rotate(${this.getDegrees(this.level() ?? 0)}deg`;
+  });
 
   private static readonly a0 = 5.5;
   private static readonly a1 = 0.445;
   private static readonly a2 = 0.00183;
   private static readonly a3 = 0.000104;
   private static readonly a4 = -0.00000101;
-
-  handRotationDeg: string = 'none';
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['level']) {
-      const level = changes['level'].currentValue ?? 0;
-      this.handRotationDeg = `rotate(${this.getDegrees(level)}deg`;
-    }
-  }
 
   private getDegrees(level: number): number {
     level = Math.max(Math.min(level, 100), 0);
