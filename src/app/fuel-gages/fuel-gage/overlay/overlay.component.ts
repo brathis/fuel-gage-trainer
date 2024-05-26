@@ -12,6 +12,7 @@ import {
   templateUrl: './overlay.component.html',
   styleUrls: ['./overlay.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class OverlayComponent {
   private static readonly y1 = 60;

@@ -11,12 +11,16 @@ import { Subscription, interval, timer } from 'rxjs';
 import { FuelGagesState } from './fuel-gages/fuel-gages.state';
 import { Result } from './results/result.model';
 import { RESULTS_SERVICE, ResultsService } from './results/results.service';
+import { ControlsComponent } from './controls/controls.component';
+import { FuelGagesComponent } from './fuel-gages/fuel-gages.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [FuelGagesComponent, ControlsComponent],
 })
 export class AppComponent implements OnInit {
   private static readonly MAX_DURATION = 30;

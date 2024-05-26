@@ -9,12 +9,16 @@ import {
 } from '@angular/core';
 import { FuelGagesState } from '../fuel-gages/fuel-gages.state';
 import { Result } from '../results/result.model';
+import { FormsModule } from '@angular/forms';
+import { NgIf, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-controls',
   templateUrl: './controls.component.html',
   styleUrls: ['./controls.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, FormsModule, DecimalPipe],
 })
 export class ControlsComponent {
   totalCapacity = input.required<number>();

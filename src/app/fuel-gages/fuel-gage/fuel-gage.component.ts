@@ -4,12 +4,16 @@ import {
   computed,
   input,
 } from '@angular/core';
+import { OverlayComponent } from './overlay/overlay.component';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-fuel-gage',
   templateUrl: './fuel-gage.component.html',
   styleUrls: ['./fuel-gage.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgStyle, OverlayComponent],
 })
 export class FuelGageComponent {
   level = input.required<number | null>();

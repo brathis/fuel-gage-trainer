@@ -8,7 +8,7 @@ describe('OverlayComponent', () => {
   let getContextMock: jest.Mock;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ declarations: [OverlayComponent] });
+    TestBed.configureTestingModule({ imports: [OverlayComponent] });
     fixture = TestBed.createComponent(OverlayComponent);
     component = fixture.componentInstance;
     getContextMock = jest.fn().mockReturnValue(null);
